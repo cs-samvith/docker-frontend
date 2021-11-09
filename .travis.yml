@@ -9,3 +9,15 @@ before_install:
 
 script:
   - docker run -e CI=true samvidocker/docker-frontend npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'us-east-2'
+  app: 'Dockerfrontend'
+  env: 'Dockerfrontend-env'
+  bucket_name: 'elasticbeanstalk-us-east-2-683889104328'
+  bucket_path: 'docker-frontend'
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
